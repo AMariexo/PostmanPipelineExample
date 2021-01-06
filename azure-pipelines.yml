@@ -4,15 +4,13 @@
 # https://aka.ms/yaml
 
 pool:
+  vmImage: 'VS2017-Win2016'
   name: Azure Pipelines
 steps:
 - script: 'npm install -g newman'
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Install Newman'
 
-- task: CmdLine@2
-  inputs:
-    script: 'echo ''$(System.DefaultWorkingDirectory)'''
 
 - script: 'newman run Practice.postman_collection.json -e PostmanTestEnv.postman_environment.json --reporters cli,junit --reporter-junit-export Results\junitReport.xml'
   workingDirectory: '$(System.DefaultWorkingDirectory)'
