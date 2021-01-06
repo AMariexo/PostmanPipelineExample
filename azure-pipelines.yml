@@ -3,14 +3,23 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-trigger:
-- none
-
 pool:
-  vmImage: 'VS2017-Win2016'
-
+  name: Azure Pipelines
 steps:
+- script: 'npm install -g newman'
+  workingDirectory: '$(System.DefaultWorkingDirectory)'
+  displayName: 'Install Newman'
 
 - task: CmdLine@2
   inputs:
-    script: 'echo abc'
+    script: 'echo ''$(System.DefaultWorkingDirectory)'''
+
+- script: 'newman run Practice.postman_collection.json -e PostmanTestEnv.postman_environment.json --reporters cli,junit --reporter-junit-export Results\junitReport.xml'
+  workingDirectory: '$(System.DefaultWorkingDirectory)'
+  displayName: 'Run API Tests'
+  continueOnError: true
+
+- task: PublishTestResults@2
+  displayName: 'Publish Test Results'
+  inputs:
+    testResultsFiles: '$(System.DefaultWorkingDirectory)\Collections\Results\*.xml'
