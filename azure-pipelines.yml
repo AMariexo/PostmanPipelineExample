@@ -10,6 +10,7 @@ pool:
   vmImage: 'VS2017-Win2016'
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
 
+- task: CmdLine@2
+  inputs:
+    script: 'echo abc'
