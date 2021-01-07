@@ -12,7 +12,7 @@ steps:
   displayName: 'Install Newman'
 
 
-- script: 'newman run Practice.postman_collection.json -e PostmanTestEnv.postman_environment.json --reporters cli,junit --reporter-junit-export Results\junitReport.xml'
+- script: 'newman run Collections\Practice.postman_collection.json -e Environments\PostmanTestEnv.postman_environment.json --reporters cli,junit --reporter-junit-export Results\junitReport.xml'
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Run API Tests'
   continueOnError: true
@@ -20,4 +20,4 @@ steps:
 - task: PublishTestResults@2
   displayName: 'Publish Test Results'
   inputs:
-    testResultsFiles: '$(System.DefaultWorkingDirectory)\Collections\Results\*.xml'
+    testResultsFiles: '$(System.DefaultWorkingDirectory)\Results\*.xml'
