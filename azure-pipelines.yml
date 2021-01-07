@@ -14,7 +14,7 @@ steps:
 - task: BatchScript@1
   inputs:
     filename: 'BatchScripts\TestBatch.bat'
-    arguments: 'PostmanTestEnv.postman_environment.json'
+    arguments: 'PostmanTestEnv.postman_environment'
     workingFolder: '$(System.DefaultWorkingDirectory)'
 
 
