@@ -11,13 +11,16 @@ steps:
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Install Newman'
 
+- task: BatchScript@1
+  inputs:
+    filename: 'BatchScripts\TestBatch.bat'
+    arguments: 'PostmanTestEnv.postman_environment.json'
+    workingFolder: '$(System.DefaultWorkingDirectory)'
 
-- script: 'newman run Collections\Practice.postman_collection.json -e Environments\PostmanTestEnv.postman_environment.json --reporters cli,junit --reporter-junit-export Results\junitReport.xml'
-  workingDirectory: '$(System.DefaultWorkingDirectory)'
-  displayName: 'Run API Tests'
-  continueOnError: true
 
 - task: PublishTestResults@2
   displayName: 'Publish Test Results'
   inputs:
     testResultsFiles: '$(System.DefaultWorkingDirectory)\Results\*.xml'
+
+
