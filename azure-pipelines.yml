@@ -11,12 +11,13 @@ steps:
   workingDirectory: '$(System.DefaultWorkingDirectory)'
   displayName: 'Install Newman'
 
+
 - task: BatchScript@1
   inputs:
     filename: 'BatchScripts\TestBatch.bat'
     arguments: 'PostmanTestEnv.postman_environment'
     workingFolder: '$(System.DefaultWorkingDirectory)'
-
+    
 
 - task: PublishTestResults@2
   displayName: 'Publish Test Results'
